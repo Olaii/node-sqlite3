@@ -1,5 +1,33 @@
 # ⚙️ node-sqlite3
 
+### DEV
+
+On windows you will need to go to `node_modules\@mapbox\node-pre-gyp\lib\util\compile.js` and change the line 80
+from:
+
+```js
+  const cmd = cp.spawn(shell_cmd, final_args, { cwd: undefined, env: process.env, stdio: [0, 1, 2] });
+
+```
+
+to:
+
+```js
+  const cmd = cp.spawn(shell_cmd, final_args, { cwd: undefined, env: process.env, stdio: [0, 1, 2], shell: true });
+```
+
+Adding the `shell: true` so it works on Node 24 LTS version.
+
+
+To create prebuilt binaries for NW.js run:
+
+```bash
+npm run prebuild --runtime=node-webkit --target=0.105.0 --target_arch=ia32
+npm run prebuild --runtime=node-webkit --target=0.105.0 --target_arch=x64
+```
+
+## Original Readme
+
 Asynchronous, non-blocking [SQLite3](https://sqlite.org/) bindings for [Node.js](http://nodejs.org/).
 
 [![Latest release](https://img.shields.io/github/release/TryGhost/node-sqlite3.svg)](https://www.npmjs.com/package/sqlite3)

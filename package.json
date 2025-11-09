@@ -8,10 +8,10 @@
     "url": "https://mapbox.com/"
   },
   "binary": {
-    "napi_versions": [
-      3,
-      6
-    ]
+    "module_name": "node_sqlite3",
+    "module_path": "./lib/binding/",
+    "host": "https://github.com/Olaii/node-sqlite3/releases/download/",
+    "remote_path": "{version}"
   },
   "contributors": [
     "Daniel Lockyer <hi@daniellockyer.com>",
@@ -44,33 +44,14 @@
     "url": "https://github.com/TryGhost/node-sqlite3.git"
   },
   "dependencies": {
+    "@mapbox/node-pre-gyp": "^2.0.0",
     "bindings": "^1.5.0",
-    "node-addon-api": "^7.0.0",
-    "prebuild-install": "^7.1.1",
-    "tar": "^6.1.11"
-  },
-  "devDependencies": {
-    "eslint": "8.56.0",
-    "mocha": "10.2.0",
-    "prebuild": "12.1.0"
-  },
-  "peerDependencies": {
-    "node-gyp": "8.x"
-  },
-  "peerDependenciesMeta": {
-    "node-gyp": {
-      "optional": true
-    }
-  },
-  "optionalDependencies": {
-    "node-gyp": "8.x"
+    "node-addon-api": "^8.2.1",
+    "tar": "^6.2.1"
   },
   "scripts": {
-    "install": "prebuild-install -r napi || node-gyp rebuild",
-    "prebuild": "prebuild --runtime napi --all --verbose",
-    "rebuild": "node-gyp rebuild",
-    "upload": "prebuild --verbose --prerelease",
-    "test": "node test/support/createdb.js && mocha -R spec --timeout 480000"
+    "install": "node-pre-gyp install || node-pre-gyp rebuild",
+    "prebuild": "node-pre-gyp configure build package"
   },
   "license": "BSD-3-Clause",
   "keywords": [
