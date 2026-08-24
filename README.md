@@ -38,7 +38,7 @@ yarn add sqlite3
 
 `sqlite3` v5+ was rewritten to use [Node-API](https://nodejs.org/api/n-api.html) so prebuilt binaries do not need to be built for specific Node versions. `sqlite3` currently builds for both Node-API v3 and v6. Check the [Node-API version matrix](https://nodejs.org/api/n-api.html#node-api-version-matrix) to ensure your Node version supports one of these. The prebuilt binaries should be supported on Node v20.17.0+.
 
-The module uses [`prebuild-install`](https://github.com/prebuild/prebuild-install) to download the prebuilt binary for your platform, if it exists. These binaries are hosted on GitHub Releases for `sqlite3` versions above 5.0.2, and they are hosted on S3 otherwise. The following targets are currently provided:
+The prebuilt binaries are bundled inside the npm package (under `prebuilds/`) and loaded at runtime by [`node-gyp-build`](https://github.com/prebuild/node-gyp-build), so no download step is needed on install. The following targets are currently provided:
 
 * `darwin-arm64`
 * `darwin-x64`
@@ -48,7 +48,7 @@ The module uses [`prebuild-install`](https://github.com/prebuild/prebuild-instal
 * `linuxmusl-x64`
 * `win32-x64`
 
-Unfortunately, [prebuild](https://github.com/prebuild/prebuild/issues/174) cannot differentiate between `armv6` and `armv7`, and instead uses `arm` as the `{arch}`. Until that is fixed, you will still need to install `sqlite3` from [source](#source-install).
+Unfortunately, [prebuildify](https://github.com/prebuild/prebuildify) cannot differentiate between `armv6` and `armv7`, and instead uses `arm` as the `{arch}`. Until that is fixed, you will still need to install `sqlite3` from [source](#source-install).
 
 Support for other platforms and architectures may be added in the future if CI supports building on them.
 
